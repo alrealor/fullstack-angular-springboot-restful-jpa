@@ -1,0 +1,14 @@
+<h1>Login!</h1>
+<div class="container">
+   <!-- {{ errorMessage }} -> One way data binding to comunicate the component with the view -->
+   <div class="alert alert-warning" *ngIf='isInvalidLogin'>{{errorMessage}}</div>   
+    
+   <!-- NgModel -> two ways data binding to comunicate the view with the component -->   
+   User name: <input type="text" name="username" [(ngModel)]=username/> 
+   Password: <input type="password" name="password" [(ngModel)]=password/>
+   <!-- (click)=handleLogin() -> Event data binding to communicate view with an action in the component -->   
+   <button (click)=handleLogin() class="btn btn-success" >Login</button>
+</div>
+
+
+

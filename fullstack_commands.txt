@@ -1,0 +1,26 @@
+Backend
+
+Initialize a SpringBoot project
+-------------------------------
+start.spring.io
+
+- Components used: Srpng web, Devtools, JPA, H2
+
+
+Java Restful WebService
+------------------------
+@RestController		-> Annotate the class to be a restfull web service
+@GetMapping("path")	-> Annotate the method to be a GET operation from the service
+@PathVariable		-> To use variables coming in request path
+
+
+Calling Backend Web Services from frontend
+------------------------------------------
+- Description: Calling a backend webservice method from angular 
+               this.welcomeDataService.executeHelloWorldBeanService().subscribe();
+  Error: Access to XMLHttpRequest at 'http://localhost:8080/hello-world-bean' from origin 'http://localhost:4200' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.
+  Solution: Adding into RestController class the ability that frontend (http://localhost:4200) can reach backend webservice 
+            @CrossOrigin(origins="http://localhost:4200") 
+			
+				
+
