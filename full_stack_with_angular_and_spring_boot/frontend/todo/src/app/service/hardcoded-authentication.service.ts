@@ -20,8 +20,14 @@ export class HardcodedAuthenticationService {
     return sessionStorage.getItem('userAuth') !== null
   }
 
+  getLoggedUserName():string {
+    return sessionStorage.getItem('userAuth');
+ }
+
   logout() {
     sessionStorage.removeItem('userAuth');
   }
+
+
 
 }

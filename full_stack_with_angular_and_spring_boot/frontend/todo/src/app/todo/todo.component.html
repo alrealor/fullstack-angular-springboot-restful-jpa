@@ -3,13 +3,15 @@
 <div class="container">
    <fieldset class="form-group">
       <label>Description</label>
-      <input type="text" class="form-control" name="description" required="required" />
+      <input type="text" [(ngModel)]="todo.description" class="form-control" name="description" 
+            required="required" />
    </fieldset>
 
    <fieldset class="form-group">
       <label>Target Date</label>
-      <input type="date" class="form-control" name="targetDate" required="required" /> 
+      <input type="datetime" [(ngModel)]="todo.targetDate" class="form-control" name="targetDate" 
+             required="required" /> 
    </fieldset>
 
-   <button class="btn btn-success" (click)="saveTodo()">Save</button>
+   <button class="btn btn-success" (click)="saveTodo(todo.id)">Save</button>
 </div>
