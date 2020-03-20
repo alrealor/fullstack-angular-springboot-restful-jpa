@@ -21,7 +21,7 @@ export class WelcomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.userName)    
+    // console.log(this.userName)    
   }
   
   // Method to call the WelcomeDataService
@@ -46,8 +46,7 @@ export class WelcomeComponent implements OnInit {
   }
 
   // Method to handle error response from WelcomeDataService
-  handleErrorResponse(error){
-    console.log(error);
+  handleErrorResponse(error){    
     this.welcomeMessageFromService = error.error.status + " - " + error.error.error + " - " + error.error.message;
   }
 

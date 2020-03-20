@@ -61,6 +61,7 @@ public class TodoWebService {
 			                             , @RequestBody Todo todo) {
 		// Add a new Todo
 		Todo createdTodo = todoHardcodedService.saveTodo(todo);
+		createdTodo.setUserName(userName);
 		
 		// Build URI with Id of Todo created
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")

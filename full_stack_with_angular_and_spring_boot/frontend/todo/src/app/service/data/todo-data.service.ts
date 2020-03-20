@@ -14,11 +14,18 @@ export class TodoDataService {
   }
 
   deleteTodo(userName: string, todoId: number) {
-    console.log('delete ${userName} - ${todoId}')
     return this.http.delete(`http://localhost:8088/users/${userName}/todos/${todoId}`);
   }
 
   retrieveTodo(userName:string, todoId:number){
     return this.http.get<Todo>(`http://localhost:8088/users/${userName}/todos/${todoId}`);
   }
+
+  updateTodo(userName:string, todoId:number, todo:Todo){
+    return this.http.put(`http://localhost:8088/users/${userName}/todos/${todoId}`, todo);
+  }
+
+  addTodo(userName:string, todo:Todo) {
+    return this.http.post(`http://localhost:8088/users/${userName}/todos`, todo);
+  }  
 }

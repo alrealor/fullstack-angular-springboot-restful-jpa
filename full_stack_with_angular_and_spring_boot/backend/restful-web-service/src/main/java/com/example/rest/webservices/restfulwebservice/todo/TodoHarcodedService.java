@@ -43,8 +43,7 @@ public class TodoHarcodedService {
 	// Save or Add Todo	from Todo's list
 	public Todo saveTodo(Todo todo) {
 		//Verify if Todo exists in Todo's list
-		if (todos.stream().filter(t -> t.getId() == todo.getId())
-				.findFirst().orElse(null) == null) {
+		if (todos.stream().filter(t -> t.getId() == todo.getId()).findFirst().orElse(null) == null) {
 			// The Todo does not exists then add it
 			todo.setId(++idCounter);
 			todos.add(todo);

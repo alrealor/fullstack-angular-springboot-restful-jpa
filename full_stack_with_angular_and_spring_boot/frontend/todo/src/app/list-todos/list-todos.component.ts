@@ -48,6 +48,10 @@ export class ListTodosComponent implements OnInit {
     )
   }
 
+  handleSuccessResponse(response: Todo[]) {
+    this.todos = response
+  }  
+
   // Call DELETE WS operation to delete by todo id
   deleteTodo(todoId: number){
     this.todoDataService.deleteTodo('X-Man', todoId).subscribe(
@@ -56,15 +60,16 @@ export class ListTodosComponent implements OnInit {
         this.refreshTodos();       
       }
     )
-  }
+  }  
 
   // Router to Update screen to update todo
   updateTodo(todoId: number){
     this.router.navigate (['todos', todoId]);
-  }  
-
-  handleSuccessResponse(response: Todo[]) {
-    this.todos = response
   }
+  
+  // Router to Update screen to update todo
+  addTodo() {
+    this.router.navigate(['todos', -1])
+  }  
 
 }

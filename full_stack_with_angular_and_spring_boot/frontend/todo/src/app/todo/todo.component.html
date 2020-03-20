@@ -1,17 +1,32 @@
 <h1>TODO id: {{todoId}}</h1>
 
 <div class="container">
-   <fieldset class="form-group">
-      <label>Description</label>
-      <input type="text" [(ngModel)]="todo.description" class="form-control" name="description" 
+
+   <!-- <div class="alert alert-warning" *ngIf="(todoForm.dirty || todoForm.touched) && todoForm.invalid">Enter valid data</div> -->
+   <div class="alert alert-warning" *ngIf="(descripttion.dirty || descripttion.touched) && descripttion.invalid">Enter a valid description at least 10 characters</div>
+   <div class="alert alert-warning" *ngIf="(targetDate.dirty || targetDate.touched) && targetDate.invalid">Enter a valid target name</div>
+
+   <form (ngSubmit)="!todoForm.invalid && saveTodo()" #todoForm="ngForm">
+      <fieldset class="form-group">
+         <label>Description</label>
+         <input type="text" name="description" #descripttion="ngModel" 
+            [(ngModel)]="todo.description" 
+            class="form-control"             
+            required="required"
+            minlength="10" />
+      </fieldset>
+
+      <fieldset class="form-group">
+         <label>Target Date</label>
+         <input type="date" name="targetDate" #targetDate="ngModel" 
+            [(ngModel)]="todo.targetDate" 
+            class="form-control"  
             required="required" />
-   </fieldset>
+      </fieldset>
 
-   <fieldset class="form-group">
-      <label>Target Date</label>
-      <input type="datetime" [(ngModel)]="todo.targetDate" class="form-control" name="targetDate" 
-             required="required" /> 
-   </fieldset>
+      <button class="btn btn-success btn-space">Save</button>
+      <button class="btn btn-warning btn-space" routerLink="/todos">Cancel</button>
 
-   <button class="btn btn-success" (click)="saveTodo(todo.id)">Save</button>
+   </form>
+
 </div>

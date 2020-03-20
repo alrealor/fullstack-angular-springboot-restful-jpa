@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Todo } from '../list-todos/list-todos.component';
 import { TodoDataService } from '../service/data/todo-data.service';
 
@@ -15,15 +15,35 @@ export class TodoComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private todoDataService: TodoDataService
+    private todoDataService: TodoDataService,
+    private router: Router
     ) {}
 
   ngOnInit() {
-    this.todo = new Todo(1,'','',null,false);
-    this.todoId = this.route.snapshot.params['todoId'] 
-    this.todoDataService.retrieveTodo('Ryu', this.todoId).subscribe(
-      response => this.todo = response
-    );
+    this.todoId = this.route.snapshot.params['todoId']
+    this.todo = new Todo(this.todoId,'','',null,false); // Initialize dummy Todo
+    if (this.todoId != -1) {
+      this.todoDataService.retrieveTodo('Ryu', this.todoId).subscribe(
+        response => this.todo = response
+      );
+    }     
+  }
+
+  // Call add or update action from backend webservice
+  saveTodo() {
+    if(this.todoId != -1) {
+      // Update
+      this.todoDataService.updateTodo('Ryu', this.todoId, this.todo)
+      .subscribe(
+        response => this.router.navigate(['todos'])
+      ); 
+    } else {
+      // Add
+      this.todoDataService.addTodo('Ryu', this.todo)
+          .subscribe(
+            response => this.router.navigate(['todos'])
+          );
+    }    
   }
 
 }

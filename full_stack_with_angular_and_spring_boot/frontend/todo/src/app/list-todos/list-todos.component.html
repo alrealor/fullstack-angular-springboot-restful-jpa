@@ -2,8 +2,8 @@
 
 <div class="alert alert-success" *ngIf='deleteMessage'>{{deleteMessage}}</div> 
 
-<div class="container">
-   <table class="table">
+<div class="container table-wrapper-scroll-y my-custom-scrollbar">
+   <table class="table table-bordered table-triped mb-0">
       <thead>
          <th>Id</th>
          <th>User Name</th>
@@ -25,4 +25,8 @@
          </tr>
       </tbody>
    </table>
+</div>
+<br/>
+<div class="container">
+      <button (click)="addTodo()" class="btn btn-success">Add</button>
 </div>

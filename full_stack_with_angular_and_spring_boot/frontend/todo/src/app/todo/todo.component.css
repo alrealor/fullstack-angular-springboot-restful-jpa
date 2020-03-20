@@ -1,0 +1,8 @@
+.ng-invalid:not(form) {
+   border-left: 3px solid red;
+}
+
+.btn-space {
+   margin-right: 5px;
+}
+
