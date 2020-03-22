@@ -1,4 +1,30 @@
-Backend
+--------
+FRONTEND  
+--------
+
+* Create new Angular Project
+-----------------------------
+
+- Install node.js
+
+- Install CLI using npm 
+    $ npm install -g @angular/cli
+
+- Create a new angular project
+    $ ng new my-app
+    
+    
+* Run an existing angular project
+----------------------------------
+
+- Go to project root folder
+    $ npm install    
+    $ npm update
+    $ npm start / $ ng serve
+
+-------
+BACKEND 
+-------
 
 Initialize a SpringBoot project
 -------------------------------
