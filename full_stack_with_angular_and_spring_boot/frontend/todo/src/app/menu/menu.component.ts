@@ -9,7 +9,9 @@ import { HardcodedAuthenticationService } from '../service/hardcoded-authenticat
 export class MenuComponent implements OnInit {
   userName:string
 
-  constructor(private hardcodedAuthenticationService: HardcodedAuthenticationService) { }
+  constructor(private hardcodedAuthenticationService: HardcodedAuthenticationService) { 
+    this.userName = 'nobody'
+  }
 
   ngOnInit() {    
     if(this.hardcodedAuthenticationService.isUserLoggedIn()){
