@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
   constructor(private router: Router, 
               private hardcodedAutenticationService: HardcodedAuthenticationService,
               private basicAutenticationService: BasicAuthenticationService) { 
-    this.username = 'Ryu'
+    this.username = 'user'
     this.password = ''
     this.errorMessage = 'Invalid credentials!'
     this.isInvalidLogin = false
@@ -43,7 +43,6 @@ export class LoginComponent implements OnInit {
     this.basicAutenticationService.executeBasicAuthenticationService(this.username, this.password)
       .subscribe(
         data => {
-          console.log(data);
           this.isInvalidLogin = false
           this.router.navigate(['welcome', this.username])
         },

@@ -1,6 +1,6 @@
---------
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------
 FRONTEND  
---------
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 * Create new Angular Project
 -----------------------------
@@ -22,9 +22,9 @@ FRONTEND
     $ npm update
     $ npm start / $ ng serve
 
--------
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------
 BACKEND 
--------
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 Initialize a SpringBoot project
 -------------------------------
@@ -47,6 +47,36 @@ Calling Backend Web Services from frontend
   Error: Access to XMLHttpRequest at 'http://localhost:8080/hello-world-bean' from origin 'http://localhost:4200' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.
   Solution: Adding into RestController class the ability that frontend (http://localhost:4200) can reach backend webservice 
             @CrossOrigin(origins="http://localhost:4200") 
+            
+            
+Spring-Secutiry            
+------------------
+- add dependency
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-security</artifactId>
+    </dependency>
+    
+- WebSecurityConfigurerAdapter
+    * Extend this class in order to configure the incoming http request and be able to receive them from frontend
+    
+    * Annotate class with these:
+      @Configuration
+      @EnableWebSecurity
+    
+    * Override methis configure(HttpSecurity)
+    @Override
+	protected void configure(HttpSecurity http) throws Exception {
+		http
+			.csrf().disable()
+			.authorizeRequests()
+			.antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+				.anyRequest().authenticated()
+				.and()
+			//.formLogin().and()
+			.httpBasic();
+	}	
 			
-				
+JWT
+------------------				
 

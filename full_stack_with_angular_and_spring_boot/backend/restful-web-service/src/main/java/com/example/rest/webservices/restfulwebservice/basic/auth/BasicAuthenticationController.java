@@ -10,7 +10,6 @@ public class BasicAuthenticationController {
 	
 	@GetMapping(path="/basicauth")
 	public BasicAuthenticationBean basicAuthentication() {
-		// throw new RuntimeException("Something wrong occurred! \n ERROR_CODE:A25");
 		return new BasicAuthenticationBean("You are authenticated!");
 	}
 	
