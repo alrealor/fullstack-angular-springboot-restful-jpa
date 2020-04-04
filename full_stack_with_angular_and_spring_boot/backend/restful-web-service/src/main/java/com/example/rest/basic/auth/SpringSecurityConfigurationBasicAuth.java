@@ -1,4 +1,4 @@
-package com.example.rest.webservices.restfulwebservice.basic.auth;
+package com.example.rest.basic.auth;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;

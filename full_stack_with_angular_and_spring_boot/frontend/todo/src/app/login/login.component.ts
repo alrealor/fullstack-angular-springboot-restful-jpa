@@ -10,8 +10,8 @@ import { HardcodedAuthenticationService } from '../service/hardcoded-authenticat
 })
 export class LoginComponent implements OnInit {
 
-  username: string
-  password: string
+  userName: string
+  userPass: string
   errorMessage: string
   isInvalidLogin: boolean
  
@@ -19,8 +19,8 @@ export class LoginComponent implements OnInit {
   constructor(private router: Router, 
               private hardcodedAutenticationService: HardcodedAuthenticationService,
               private basicAutenticationService: BasicAuthenticationService) { 
-    this.username = 'user'
-    this.password = ''
+    this.userName = 'user'
+    this.userPass = ''
     this.errorMessage = 'Invalid credentials!'
     this.isInvalidLogin = false
   }
@@ -28,23 +28,39 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
 
+  // Method to handle JWT authentication through JWT webservice
+  handleJWTAuthLogin() {
+    this.basicAutenticationService.executeJWTAuthenticationService(this.userName, this.userPass)
+      .subscribe(
+        data => {
+          this.isInvalidLogin = false
+          this.router.navigate(['welcome', this.userName])
+        },
+        error => {
+          this.isInvalidLogin = true
+        }
+      );
+  }
+
+
   // Method to handle authentication in hardcoded way
   handleLogin() {    
-    if(this.hardcodedAutenticationService.authenticate(this.username, this.password)) {
+    if(this.hardcodedAutenticationService.authenticate(this.userName, this.userPass)) {
       this.isInvalidLogin = false
-      this.router.navigate(['welcome', this.username])
+      this.router.navigate(['welcome', this.userName])
     } else {
       this.isInvalidLogin = true
     }
   }
+  
 
   // Method to handle basic authentication through webservice
   handleBasicAuthLogin() {
-    this.basicAutenticationService.executeBasicAuthenticationService(this.username, this.password)
+    this.basicAutenticationService.executeBasicAuthenticationService(this.userName, this.userPass)
       .subscribe(
         data => {
           this.isInvalidLogin = false
-          this.router.navigate(['welcome', this.username])
+          this.router.navigate(['welcome', this.userName])
         },
         error => {
           this.isInvalidLogin = true

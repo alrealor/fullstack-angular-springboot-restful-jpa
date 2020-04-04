@@ -4,7 +4,6 @@ FRONTEND
 
 * Create new Angular Project
 -----------------------------
-
 - Install node.js
 
 - Install CLI using npm 
@@ -13,7 +12,8 @@ FRONTEND
 - Create a new angular project
     $ ng new my-app
     
-    
+ 
+ 
 * Run an existing angular project
 ----------------------------------
 
@@ -22,25 +22,25 @@ FRONTEND
     $ npm update
     $ npm start / $ ng serve
 
+    
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------
 BACKEND 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-Initialize a SpringBoot project
+* Initialize a SpringBoot project
 -------------------------------
-start.spring.io
-
+- start.spring.io
 - Components used: Srpng web, Devtools, JPA, H2
 
 
-Java Restful WebService
+* Java Restful WebService
 ------------------------
 @RestController		-> Annotate the class to be a restfull web service
 @GetMapping("path")	-> Annotate the method to be a GET operation from the service
 @PathVariable		-> To use variables coming in request path
 
 
-Calling Backend Web Services from frontend
+* Calling Backend Web Services from frontend
 ------------------------------------------
 - Description: Calling a backend webservice method from angular 
                this.welcomeDataService.executeHelloWorldBeanService().subscribe();
@@ -49,8 +49,9 @@ Calling Backend Web Services from frontend
             @CrossOrigin(origins="http://localhost:4200") 
             
             
-Spring-Secutiry            
-------------------
+
+* Spring-Secutiry            
+---------------------
 - add dependency
     <dependency>
         <groupId>org.springframework.boot</groupId>
@@ -77,6 +78,33 @@ Spring-Secutiry
 			.httpBasic();
 	}	
 			
-JWT
+* JWT
 ------------------				
+- Adding JWT dependencies
+    <!-- JWT -->
+    <dependency>
+        <groupId>io.jsonwebtoken</groupId>
+        <artifactId>jjwt</artifactId>
+        <version>0.9.1</version>
+    </dependency>
+
+- Add JWT classes
+
+
+- Get JWT token
+    POST -> http://localhost:8089/authenticate
+    HEADERS -> Origin = http://localhost:4200
+    BODY -> { "username":"user", password":"123"}
+    RESULT:
+    {
+        "token": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJpbjI4bWludXRlcyIsImV4cCI6MTU4NjYzNjc0MCwiaWF0IjoxNTg2MDMxOTQwfQ.RXwLT-dusnPUGHbvInHEWOEP5jWwOWm-5FjOn9wqOQaUb9amgCBcS8o8-zBhEOAkXfr7FZjrQI8gqJ9hiO6c8g"
+    }
+    
+-  Use JWT tocket to do a app request
+    GET -> http://localhost:8089/users/mrx/todos
+    HEADERS
+        Origin = http://localhost:4200
+        Authorization = Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJpbjI4bWludXRlcyIsImV4cCI6MTU4NjYzNjc0MCwiaWF0IjoxNTg2MDMxOTQwfQ.RXwLT-dusnPUGHbvInHEWOEP5jWwOWm-5FjOn9wqOQaUb9amgCBcS8o8-zBhEOAkXfr7FZjrQI8gqJ9hiO6c8g
+    RESULT: the service response    
+    
 

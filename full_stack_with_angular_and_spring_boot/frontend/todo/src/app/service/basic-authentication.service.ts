@@ -13,7 +13,25 @@ export class BasicAuthenticationService {
 
   constructor(private http: HttpClient) {}
 
-  // Methos to call atuhtentication web service
+  // Method to create JWT Authorization headern and call authenticate JWT
+  executeJWTAuthenticationService(userName, userPass) {
+    // Call GET "basicauth" RES webservice
+    return this.http.post<any>(`${API_URL}/authenticate`
+                              , {username: userName, password: userPass})
+                    .pipe( // Make the next action
+                      map(
+                        data => { // Response is successfully
+                          // Add data to the session storage
+                          sessionStorage.setItem(USER_AUTH, userName);
+                          sessionStorage.setItem(TOKEN, `Bearer ${data.token}`);
+                          return data;
+                        }
+                      )
+                    )
+  }
+  
+
+  // Method to create Basic Authorization headern and call authentication web service
   executeBasicAuthenticationService(userName, password) {
 
     // Build an Encode string in base-64 for credentials
@@ -28,17 +46,17 @@ export class BasicAuthenticationService {
     
     // Call GET "basicauth" RES webservice
     return this.http.get<BasicAuthenticationBean>(`${API_URL}/basicauth`, {headers: header})
-          .pipe( // Make the next action
-                map(
-                  data => { // Response is successfully
-                    // Add data to the session storage
-                    sessionStorage.setItem(USER_AUTH, userName);
-                    sessionStorage.setItem(TOKEN, basicAuthHeaderString);
-                    return data;
-                  }
-                )
-              )
-    }
+                    .pipe( // Make the next action
+                      map(
+                        data => { // Response is successfully
+                          // Add data to the session storage
+                          sessionStorage.setItem(USER_AUTH, userName);
+                          sessionStorage.setItem(TOKEN, basicAuthHeaderString);
+                          return data;
+                        }
+                      )
+                    )
+  }
   
   // Get the session item "userAuth" (user name)
   getAuthUser() {

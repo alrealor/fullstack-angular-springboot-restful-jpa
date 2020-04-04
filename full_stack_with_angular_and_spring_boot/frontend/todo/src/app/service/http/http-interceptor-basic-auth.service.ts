@@ -13,12 +13,9 @@ export class HttpInterceptorBasicAuthService implements HttpInterceptor {
   // Interceptor method to put the authorization header into request
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
-    console.log("Inside Interceptor: HttpInterceptorBasicAuthService" );
-
     let basicAuthHeaderString = this.basicAuthenticationService.getAuthToken();
-    console.log("interceptor.basicAuthHeaderString = " + basicAuthHeaderString);
 
-    // If user is logged then add encoder headers to the request
+    // If user token already exists then add it to the request
     if(basicAuthHeaderString) {
       request = request.clone({
         setHeaders : {
