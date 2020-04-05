@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
   constructor(private router: Router, 
               private hardcodedAutenticationService: HardcodedAuthenticationService,
               private basicAutenticationService: BasicAuthenticationService) { 
-    this.userName = 'user'
+    this.userName = 'Marty McFly'
     this.userPass = ''
     this.errorMessage = 'Invalid credentials!'
     this.isInvalidLogin = false

@@ -18,23 +18,24 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 @CrossOrigin(origins="http://localhost:4200")
 @RestController
-public class TodoWebService {
+public class TodoJpaWebServiceController {
 	
 	@Autowired
-	TodoHarcodedService todoHardcodedService;
+	TodoJpaRepository todoJpaRepository;
 	
 	// Get all user Todo's
-	@GetMapping(path = "/users/{userName}/todos")
+	@GetMapping(path = "/jpa/users/{userName}/todos")
 	public List<Todo> getAllTodos(@PathVariable String userName) {
-		return todoHardcodedService.findAllTodos();	
+		return todoJpaRepository.findByUserName(userName);
 	}
 		
 	// Get Todo by Id
-	@GetMapping(path = "/users/{userName}/todos/{todoId}")
+	@GetMapping(path = "/jpa/users/{userName}/todos/{todoId}")
 	public Todo getTodo(@PathVariable String userName, @PathVariable long todoId) {
-		return todoHardcodedService.findTodoById(todoId);	
+		return todoJpaRepository.findById(todoId).get();
 	}	
-		
+	
+	/*
 	// Delete user Todo by Id
 	@DeleteMapping("users/{userName}/todos/{todoId}")
 	public ResponseEntity<Void> deleteTodo(@PathVariable String userName, @PathVariable long todoId ) {
@@ -69,6 +70,7 @@ public class TodoWebService {
 		
 		return  ResponseEntity.created(uri).build();
 	}	
+	*/
 	
 	
 

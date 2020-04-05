@@ -78,6 +78,7 @@ BACKEND
 			.httpBasic();
 	}	
 			
+            
 * JWT
 ------------------				
 - Adding JWT dependencies
@@ -89,7 +90,6 @@ BACKEND
     </dependency>
 
 - Add JWT classes
-
 
 - Get JWT token
     POST -> http://localhost:8089/authenticate
@@ -105,6 +105,46 @@ BACKEND
     HEADERS
         Origin = http://localhost:4200
         Authorization = Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJpbjI4bWludXRlcyIsImV4cCI6MTU4NjYzNjc0MCwiaWF0IjoxNTg2MDMxOTQwfQ.RXwLT-dusnPUGHbvInHEWOEP5jWwOWm-5FjOn9wqOQaUb9amgCBcS8o8-zBhEOAkXfr7FZjrQI8gqJ9hiO6c8g
-    RESULT: the service response    
+    RESULT: the service response   
+
+- Add new user:
+    - Create a new Encoder password
+        public static void main(String[] args) {
+            BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+            for (int i=0; i<=9; i++) {
+                String encoderString = encoder.encode("123");
+                System.out.println(encoderString); // 10th code -> $2a$10$jYvyNSKquhdMGL0HJSrZ6e6P/a4G22ao8R1XB.ei27J6gsqCoaNlS
+            }		
+        }
+    
+    - Add user and password to JwtInMemoryUserDetailsService.java
+      static {        
+        inMemoryUserList.add(new JwtUserDetails(1L, "user",
+                "$2a$10$jYvyNSKquhdMGL0HJSrZ6e6P/a4G22ao8R1XB.ei27J6gsqCoaNlS", "ROLE_USER_2"));    
+      }
+
+
+* JPA and H2
+----------------
+- Convert Bean to Entity from package javax.persistence.*
+    @Entity: Tell java persistence that this bean is treated as a table.
+    @Id: Set the table ID column (The java type should be a Wrapper class)
+    @GeneratedValue: Tells that this will be an auto incremented value, commonly used for IDs
+    
+- JPA and H2 information properties
+    # JPA
+    spring.jpa.show-sql=true
+    spring.h2.console.enabled=true 
+
+- Add data.sql resource file into src/main/java/resources   
+    > Add the insert into todo statements
+
+- Enter to H2 condifuration console: localhost:8089/h2-console 
+    > Ensure JDBC URL = jdbc:h2:mem:testdb
+    > connect to get database environment
+    
+- Class JpaRepository<T, ID> helps to have all basic database operations and you can build your own.
+    > Example: to findByUserName(String userName) - The class anotated as Entity must have a property "userName"
+     
     
 

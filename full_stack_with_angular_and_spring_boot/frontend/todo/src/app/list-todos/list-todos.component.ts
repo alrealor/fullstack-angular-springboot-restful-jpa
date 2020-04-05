@@ -35,7 +35,7 @@ export class ListTodosComponent implements OnInit {
   constructor(
     private todoDataService: TodoDataService,
     private router: Router
-    ) { }
+    ) {}
 
   ngOnInit() { 
     this.refreshTodos();
@@ -43,9 +43,10 @@ export class ListTodosComponent implements OnInit {
 
   // Call GET WS operation to retrieve all todos
   refreshTodos() {
-    this.todoDataService.retrieveTodos('Ryu').subscribe(
-      response => this.handleSuccessResponse(response)
-    )
+    this.todoDataService.retrieveTodos('Marty McFly')
+      .subscribe(
+                  response => this.handleSuccessResponse(response)
+      )
   }
 
   handleSuccessResponse(response: Todo[]) {
