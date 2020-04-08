@@ -35,33 +35,31 @@ public class TodoJpaWebServiceController {
 		return todoJpaRepository.findById(todoId).get();
 	}	
 	
-	/*
+	
 	// Delete user Todo by Id
-	@DeleteMapping("users/{userName}/todos/{todoId}")
-	public ResponseEntity<Void> deleteTodo(@PathVariable String userName, @PathVariable long todoId ) {
-		if (todoHardcodedService.deleteTodoById(todoId) == null) {
-			return ResponseEntity.notFound().build();
-		}
+	@DeleteMapping("/jpa/users/{userName}/todos/{todoId}")
+	public ResponseEntity<Void> deleteTodo(@PathVariable String userName, @PathVariable long todoId ) {	
+		todoJpaRepository.deleteById(todoId);		
 		return ResponseEntity.noContent().build();		
 	}
 		
 	// Update user Todo
-	@PutMapping("users/{userName}/todos/{todoId}")
+	@PutMapping("/jpa/users/{userName}/todos/{todoId}")
 	public ResponseEntity<Todo> updateTodo(@PathVariable String userName
 			                             , @PathVariable long todoId
 			                             , @RequestBody Todo todo) {
 		// Update Todo
-		todoHardcodedService.saveTodo(todo);
+		todoJpaRepository.save(todo);
 		return new ResponseEntity<Todo>(todo, HttpStatus.OK);				
 	}
 	
 	
 	// Add user Todo
-	@PostMapping("users/{userName}/todos")
-	public ResponseEntity<Void> updateTodo(@PathVariable String userName
+	@PostMapping("/jpa/users/{userName}/todos")
+	public ResponseEntity<Void> createTodo(@PathVariable String userName
 			                             , @RequestBody Todo todo) {
 		// Add a new Todo
-		Todo createdTodo = todoHardcodedService.saveTodo(todo);
+		Todo createdTodo = todoJpaRepository.save(todo);
 		createdTodo.setUserName(userName);
 		
 		// Build URI with Id of Todo created
@@ -70,9 +68,4 @@ public class TodoJpaWebServiceController {
 		
 		return  ResponseEntity.created(uri).build();
 	}	
-	*/
-	
-	
-
-
 }

@@ -27,10 +27,55 @@ FRONTEND
 BACKEND 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-* Initialize a SpringBoot project
--------------------------------
+* SpringBoot
+-------------
+- Goals:
+    > Enable building production ready applications quickly
+    > Provide common nono-functional features:
+        - Embedded servers
+        - Metrics
+        - Healt checks
+        - Externalized confifuration
+- IS NOT:
+    > Zero code generator
+    > Neither an application server nor web server
+    
+
+    
+* SpringBoot vs Spring MVC
+---------------------------
+- What is the core problem that Spring Framework solves?
+    R: Dependency Injection or IoC Inversion of Control
+- What is the core problem that Spring MVC Framework solves?
+    R: Dispatcher Servlet, ModelandView and ViewResolver
+- What do we need SPRINGBOOT?
+    R: To CONFIGURE AUTOMATICALLY the features of Spring Frameworks adding this frameworks to the CLASSPATH as jars
+
+
+    
+* SpringBoot STARTERS
+----------------------
+- Dependencies SpringBoot uses to start and auto-configure features like spring-webmvc, spring-jdbc, etc.
+
+- Some Important Starters:
+    > spring-boot-starter-web-services  -> SOAP web service
+    > spring-boot-starter-web           -> Web and RESTful application
+    > spring-boot-starter-test          -> Unit testing and integration testing
+    > spring-boot-starter-hateoas       -> A
+    > spring-boot-starter-jdbc          -> Traditional JDBC
+    > spring-boot-starter-security      -> Authentication and Authorization using Spring Secutiry
+    > spring-boot-starter-data-jpa      -> sprinf data JPA with Hibernate
+    > spring-boot-starter-cache         -> Enabling Spring Framework's caching support
+    > spring-boot-starter-data-rest     -> Expose simple REST Service using Spring Data REST
+
+
+    
+* Initialize a SpringBoot project using SPRING INITIALIZR
+----------------------------------------------------------
 - start.spring.io
+
 - Components used: Srpng web, Devtools, JPA, H2
+
 
 
 * Java Restful WebService
@@ -38,6 +83,7 @@ BACKEND
 @RestController		-> Annotate the class to be a restfull web service
 @GetMapping("path")	-> Annotate the method to be a GET operation from the service
 @PathVariable		-> To use variables coming in request path
+
 
 
 * Calling Backend Web Services from frontend
@@ -77,7 +123,8 @@ BACKEND
 			//.formLogin().and()
 			.httpBasic();
 	}	
-			
+	
+    
             
 * JWT
 ------------------				
@@ -124,6 +171,7 @@ BACKEND
       }
 
 
+      
 * JPA and H2
 ----------------
 - Convert Bean to Entity from package javax.persistence.*
