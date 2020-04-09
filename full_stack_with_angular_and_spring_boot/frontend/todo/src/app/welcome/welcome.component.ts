@@ -14,15 +14,12 @@ export class WelcomeComponent implements OnInit {
   userName: string
   welcomeMessageFromService: string
 
-  constructor(
-    private route: ActivatedRoute,
-    private welcomeDataService: WelcomeDataService) { 
-    this.userName = this.route.snapshot.params['userName']   
+  constructor(private activatedRoute: ActivatedRoute
+            , private welcomeDataService: WelcomeDataService) { 
+    this.userName = this.activatedRoute.snapshot.params['userName']   
   }
 
-  ngOnInit() {
-    // console.log(this.userName)    
-  }
+  ngOnInit() {}
   
   // Method to call the WelcomeDataService
   getWelcomeMessage(){
@@ -32,13 +29,13 @@ export class WelcomeComponent implements OnInit {
     );
   }
 
-    // Method to call the WelcomeDataService
-    getWelcomeMessagePathVariable(){
-      this.welcomeDataService.executeHelloWorldPathVariableService(this.userName).subscribe(
-        response => this.handleSuccessfulResponse(response),
-        error => this.handleErrorResponse(error)
-      );
-    }
+  // Method to call the WelcomeDataService
+  getWelcomeMessagePathVariable(){
+    this.welcomeDataService.executeHelloWorldPathVariableService(this.userName).subscribe(
+      response => this.handleSuccessfulResponse(response),
+      error => this.handleErrorResponse(error)
+    );
+  }
 
   // Method to handle success response from WelcomeDataService
   handleSuccessfulResponse(response) {

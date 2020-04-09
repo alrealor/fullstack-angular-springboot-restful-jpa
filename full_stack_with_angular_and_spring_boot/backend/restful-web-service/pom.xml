@@ -8,10 +8,10 @@
 		<version>2.2.5.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.example.rest.webservices</groupId>
-	<artifactId>restful-web-service</artifactId>
+	<groupId>com.fullstack</groupId>
+	<artifactId>fullstack-app</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>restful-web-service</name>
+	<name>fullstack-app</name>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>

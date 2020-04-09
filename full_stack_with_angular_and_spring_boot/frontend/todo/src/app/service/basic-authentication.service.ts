@@ -15,9 +15,10 @@ export class BasicAuthenticationService {
 
   // Method to create JWT Authorization headern and call authenticate JWT
   executeJWTAuthenticationService(userName, userPass) {
-    // Call GET "basicauth" RES webservice
+    // Call GET "basicauth" REST webservice
     return this.http.post<any>(`${API_URL}/authenticate`
-                              , {username: userName, password: userPass})
+                              , {username: userName, password: userPass}
+                              )
                     .pipe( // Make the next action
                       map(
                         data => { // Response is successfully
@@ -32,31 +33,28 @@ export class BasicAuthenticationService {
   
 
   // Method to create Basic Authorization headern and call authentication web service
-  executeBasicAuthenticationService(userName, password) {
-
-    // Build an Encode string in base-64 for credentials
-    let basicAuthHeaderString = 'Basic ' + window.btoa(userName + ':' + password);
-
-    /* Build an authorization header in order to pass it to the webservice and can be
-       handled an validated by spring security
-    */
-    let header = new HttpHeaders({
-      Authorization: basicAuthHeaderString
-    });
-    
-    // Call GET "basicauth" RES webservice
-    return this.http.get<BasicAuthenticationBean>(`${API_URL}/basicauth`, {headers: header})
-                    .pipe( // Make the next action
-                      map(
-                        data => { // Response is successfully
-                          // Add data to the session storage
-                          sessionStorage.setItem(USER_AUTH, userName);
-                          sessionStorage.setItem(TOKEN, basicAuthHeaderString);
-                          return data;
-                        }
-                      )
-                    )
-  }
+  // executeBasicAuthenticationService(userName, password) {
+  //   // Build an Encode string in base-64 for credentials
+  //   let basicAuthHeaderString = 'Basic ' + window.btoa(userName + ':' + password);
+  //   /* Build an authorization header in order to pass it to the webservice and can be
+  //      handled an validated by spring security
+  //   */
+  //   let header = new HttpHeaders({
+  //     Authorization: basicAuthHeaderString
+  //   });
+  //   // Call GET "basicauth" RES webservice
+  //   return this.http.get<BasicAuthenticationBean>(`${API_URL}/basicauth`, {headers: header})
+  //                   .pipe( // Make the next action
+  //                     map(
+  //                       data => { // Response is successfully
+  //                         // Add data to the session storage
+  //                         sessionStorage.setItem(USER_AUTH, userName);
+  //                         sessionStorage.setItem(TOKEN, basicAuthHeaderString);
+  //                         return data;
+  //                       }
+  //                     )
+  //                   )
+  // }
   
   // Get the session item "userAuth" (user name)
   getAuthUser() {

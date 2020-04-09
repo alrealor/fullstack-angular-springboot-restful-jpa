@@ -21,21 +21,17 @@ export class Todo {
 
 // Class incharged of call backend web service TodoDataService
 export class ListTodosComponent implements OnInit {
-
-  // todos = [
-  //   new Todo(1, 'Learn Angular and Typescript', new Date(), false),
-  //   new Todo(2, 'Learn Git, GitFlow, Bitbucket and SourceTree', new Date(), false),
-  //   new Todo(3, 'Learn Docker and Kubernetes', new Date(), false),
-  //   new Todo(4, 'Learn about IntelliJ IDE', new Date(), false)
-  // ] 
-
+  
+  userName: string
   todos: Todo[]
   deleteMessage: string
 
-  constructor(
-    private todoDataService: TodoDataService,
-    private router: Router
-    ) {}
+  constructor(private todoDataService: TodoDataService
+            , private router: Router
+            , private activatedRoute: ActivatedRoute) {
+    this.userName = this.activatedRoute.snapshot.params['userName']
+  }
+
 
   ngOnInit() { 
     this.refreshTodos();
@@ -43,9 +39,9 @@ export class ListTodosComponent implements OnInit {
 
   // Call GET WS operation to retrieve all todos
   refreshTodos() {
-    this.todoDataService.retrieveTodos('Marty McFly')
+    this.todoDataService.retrieveTodos(this.userName)
       .subscribe(
-                  response => this.handleSuccessResponse(response)
+        response => this.handleSuccessResponse(response)
       )
   }
 
@@ -55,22 +51,23 @@ export class ListTodosComponent implements OnInit {
 
   // Call DELETE WS operation to delete by todo id
   deleteTodo(todoId: number){
-    this.todoDataService.deleteTodo('X-Man', todoId).subscribe(
-      response => {
-        this.deleteMessage = `Todo ${todoId} was deleted successfully!`;
-        this.refreshTodos();       
-      }
-    )
+    this.todoDataService.deleteTodo(this.userName, todoId)
+      .subscribe(
+        response => {
+          this.deleteMessage = `Todo ${todoId} was deleted successfully!`;
+          this.refreshTodos();       
+        }
+      )
   }  
 
   // Router to Update screen to update todo
-  updateTodo(todoId: number){
-    this.router.navigate (['todos', todoId]);
+  updateTodo(userName:string, todoId: number){
+    this.router.navigate (['todo', userName, todoId]);
   }
   
   // Router to Update screen to update todo
   addTodo() {
-    this.router.navigate(['todos', -1])
+    this.router.navigate(['todo', this.userName, -1])
   }  
 
 }

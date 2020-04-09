@@ -52,30 +52,38 @@ BACKEND
     R: To CONFIGURE AUTOMATICALLY the features of Spring Frameworks adding this frameworks to the CLASSPATH as jars
 
 
-    
-* SpringBoot STARTERS
-----------------------
-- Dependencies SpringBoot uses to start and auto-configure features like spring-webmvc, spring-jdbc, etc.
 
-- Some Important Starters:
-    > spring-boot-starter-web-services  -> SOAP web service
-    > spring-boot-starter-web           -> Web and RESTful application
-    > spring-boot-starter-test          -> Unit testing and integration testing
-    > spring-boot-starter-hateoas       -> A
-    > spring-boot-starter-jdbc          -> Traditional JDBC
-    > spring-boot-starter-security      -> Authentication and Authorization using Spring Secutiry
-    > spring-boot-starter-data-jpa      -> sprinf data JPA with Hibernate
-    > spring-boot-starter-cache         -> Enabling Spring Framework's caching support
-    > spring-boot-starter-data-rest     -> Expose simple REST Service using Spring Data REST
-
-
-    
 * Initialize a SpringBoot project using SPRING INITIALIZR
 ----------------------------------------------------------
 - start.spring.io
 
 - Components used: Srpng web, Devtools, JPA, H2
 
+
+
+* SpringBoot Project
+------------------------
+- @SpringBootApplication	-> Initalizes Spring (Component Scan) and SpringBoot (Auto Configuration)
+- SpringApplication.run()	-> Launches a SpringBoot Application
+
+
+
+* SpringBoot STARTERS
+----------------------
+- Dependencies SpringBoot uses to start and auto-configure features like spring-webmvc, spring-jdbc, etc.
+
+- Some Important Starters:
+	> spring-boot-starter-parent		-> Contains version of dependencies and default java version
+    > spring-boot-starter-web-services  -> SOAP web service
+    > spring-boot-starter-web           -> Web and RESTful application
+    > spring-boot-starter-test          -> Unit testing and integration testing
+    > spring-boot-starter-hateoas       -> For hateos use
+    > spring-boot-starter-jdbc          -> Traditional JDBC
+    > spring-boot-starter-security      -> Authentication and Authorization using Spring Secutiry
+    > spring-boot-starter-data-jpa      -> sprinf data JPA with Hibernate
+    > spring-boot-starter-cache         -> Enabling Spring Framework's caching support
+    > spring-boot-starter-data-rest     -> Expose simple REST Service using Spring Data REST
+		
 
 
 * Java Restful WebService

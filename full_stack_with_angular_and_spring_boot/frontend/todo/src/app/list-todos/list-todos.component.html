@@ -20,7 +20,7 @@
             <td>{{ todo.description }}</td>
             <td>{{ todo.targetDate | date }}</td>
             <td>{{ todo.done }}</td>
-            <td><button (click)="updateTodo(todo.id)" class="btn btn-success">Update</button></td>
+            <td><button (click)="updateTodo(todo.userName, todo.id)" class="btn btn-success">Update</button></td>
             <td><button (click)="deleteTodo(todo.id)" class="btn btn-warning">Delete</button></td>
          </tr>
       </tbody>

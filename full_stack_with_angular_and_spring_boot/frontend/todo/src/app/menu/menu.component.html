@@ -6,7 +6,7 @@
 
       <ul class="navbar-nav">
          <li><a *ngIf="basicAuthenticationService.isUserAuthenticated()" routerLink="/welcome/{{userName}}" class="nav-link">Home</a></li>
-         <li><a *ngIf="basicAuthenticationService.isUserAuthenticated()" routerLink="/todos" class="nav-link">Todos</a></li>
+         <li><a *ngIf="basicAuthenticationService.isUserAuthenticated()" routerLink="/todos/{{userName}}" class="nav-link">Todos</a></li>
       </ul>
 
       <ul class="navbar-nav navbar-collapse justify-content-end">

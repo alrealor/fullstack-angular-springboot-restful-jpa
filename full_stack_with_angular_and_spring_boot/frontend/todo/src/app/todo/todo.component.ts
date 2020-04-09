@@ -9,39 +9,46 @@ import { TodoDataService } from '../service/data/todo-data.service';
   styleUrls: ['./todo.component.css']
 })
 export class TodoComponent implements OnInit {
-
+  
   todoId:number;
+  userName:string;
   todo:Todo;
+  todoAction:string;
 
   constructor(
-    private route: ActivatedRoute,
+    private activatedRoute: ActivatedRoute,
     private todoDataService: TodoDataService,
     private router: Router
     ) {}
 
   ngOnInit() {
-    this.todoId = this.route.snapshot.params['todoId']
-    this.todo = new Todo(this.todoId,'Marty McFly','',null,false); // Initialize dummy Todo
+    this.todoId = this.activatedRoute.snapshot.params['todoId']
+    this.userName = this.activatedRoute.snapshot.params['userName']
+    this.todo = new Todo(this.todoId, this.userName, '', null, false); // Initialize dummy Todo
     if (this.todoId != -1) {
-      this.todoDataService.retrieveTodo('Marty McFly', this.todoId).subscribe(
-        response => this.todo = response
-      );
+      this.todoAction = 'Update'
+      this.todoDataService.retrieveTodo(this.userName, this.todoId)
+        .subscribe(
+          response => this.todo = response
+        );
+    } else {
+      this.todoAction = 'Add'
     }     
   }
 
   // Call add or update action from backend webservice
   saveTodo() {
-    if(this.todoId != -1) {
+    if (this.todoId != -1) {
       // Update
-      this.todoDataService.updateTodo('Marty McFly', this.todoId, this.todo)
-      .subscribe(
-        response => this.router.navigate(['todos'])
-      ); 
+      this.todoDataService.updateTodo(this.userName, this.todoId, this.todo)
+        .subscribe(
+          successResponse => this.router.navigate(['todos', this.userName])
+        ); 
     } else {
       // Add
-      this.todoDataService.addTodo('Marty McFly', this.todo)
+      this.todoDataService.addTodo(this.userName, this.todo)
           .subscribe(
-            response => this.router.navigate(['todos'])
+            response => this.router.navigate(['todos', this.userName])
           );
     }    
   }

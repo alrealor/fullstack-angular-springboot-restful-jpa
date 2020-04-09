@@ -13,9 +13,9 @@ const routes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'login', component: LoginComponent },
   { path: 'welcome/:userName', component: WelcomeComponent, canActivate: [RouteGuardService] },
-  { path: 'todos', component: ListTodosComponent, canActivate: [RouteGuardService] },
+  { path: 'todos/:userName', component: ListTodosComponent, canActivate: [RouteGuardService] },
   { path: 'logout', component: LogoutComponent, canActivate: [RouteGuardService] },
-  { path: 'todos/:todoId', component: TodoComponent, canActivate: [RouteGuardService] },
+  { path: 'todo/:userName/:todoId', component: TodoComponent, canActivate: [RouteGuardService] },
   { path: '**', component: ErrorComponent }
 ];
 
